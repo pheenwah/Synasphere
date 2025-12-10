@@ -25,11 +25,49 @@ export const getPostsByUserId = async (req: Request, res: Response) => {
   try {
     const userId = req.params.userId;
     const posts = await PostModel.find({ userId });
+    console.log("Fetching posts for userId:", userId, "Found:", posts.length);
 
     if (posts.length > 0) {
       res.status(200).json(posts);
     } else {
       res.status(404).json({ message: "Posts not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
+export const updatePost = async (req: Request, res: Response) => {
+  try {
+    const postId = req.params.postId;
+    const updatedData = req.body;
+    console.log("Updating post:", postId, "with data:", updatedData);
+
+    const updatedPost = await PostModel.findByIdAndUpdate(postId, updatedData, {
+      new: true,
+    });
+
+    if (updatedPost) {
+      res.status(200).json(updatedPost);
+    } else {
+      res.status(404).json({ message: "Post not found" });
+    }
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
+export const deletePost = async (req: Request, res: Response) => {
+  try {
+    const postId = req.params.postId;
+
+    const deletedPost = await PostModel.findByIdAndDelete(postId);
+    console.log("Deleted post ID:", postId);
+
+    if (deletedPost) {
+      res.status(200).json({ message: "Post deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Post not found" });
     }
   } catch (error) {
     res.status(400).json({ error });
