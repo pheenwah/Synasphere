@@ -1,5 +1,5 @@
 import type { Post } from "../types/post";
-import "../styles/PostCard.css";
+import "../styles/components/PostCard.css";
 import { useState } from "react";
 
 interface Props {

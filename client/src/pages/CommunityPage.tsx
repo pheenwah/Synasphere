@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import type { Post } from "../types/post";
 import { updatePost, deletePost, fetchPosts } from "../services/api";
 import PostCard from "../components/PostCard";
-import "../styles/Feed.css";
+import LoadingPage from "./LoadingPage";
 
-export default function Feed() {
+import "../styles/pages/Community.css";
+
+export default function CommunityPage() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -43,13 +45,8 @@ export default function Feed() {
     loadPosts();
   }, []);
 
-  if (loading) {
-    return (
-      <div className="feed-container">
-        <div className="loader"></div>
-      </div>
-    );
-  }
+  if (loading) return <LoadingPage />;
+
   return (
     <div className="feed-container">
       {posts.map((post) => (
