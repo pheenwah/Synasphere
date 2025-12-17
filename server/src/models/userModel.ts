@@ -1,5 +1,11 @@
 import mongoose from "mongoose";
 
+export interface IUser {
+  sunSign: string;
+  moonSign: string;
+  risingSign: string;
+}
+
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, required: true, unique: true },

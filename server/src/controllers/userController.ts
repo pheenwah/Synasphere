@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { UserModel } from "../models/userModel";
+import { calculateCompatibility } from "../utils/compatibility";
 
 export const createUser = async (req: Request, res: Response) => {
   try {
@@ -49,22 +50,6 @@ export const getCompatibility = async (req: Request, res: Response) => {
 
     const otherUsers = await UserModel.find({ _id: { $ne: currentUser._id } });
     console.log("Other users:", otherUsers);
-
-    const calculateCompatibility = (currentUser: any, otherUser: any) => {
-      let score = Math.floor(Math.random() * 51) + 50;
-      if (
-        currentUser.sunSign === otherUser.sunSign ||
-        currentUser.moonSign === otherUser.moonSign ||
-        currentUser.risingSign === otherUser.risingSign
-      ) {
-        score += 10;
-        if (score > 100) score = 100;
-      } else {
-        score -= 10;
-        if (score < 50) score = 50;
-      }
-      return score;
-    };
 
     console.log("Calculating compatibility for", otherUsers.length, "users");
 
