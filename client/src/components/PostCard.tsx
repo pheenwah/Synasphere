@@ -29,35 +29,39 @@ export default function PostCard({ post, onUpdate, onDelete }: Props) {
     <div className="post-card">
       {isEditing ? (
         <>
-          <textarea
-            value={editedContent}
-            onChange={(e) => setEditedContent(e.target.value)}
-            rows={3}
-            className="post-card-textarea"
-          />
-          <button onClick={handleSave} disabled={isSaving}>
-            {isSaving ? <div className="loader loader-button"></div> : "Save"}
-          </button>
-          <button
-            onClick={() => {
-              setEditedContent(post.content);
-              setIsEditing(false);
-            }}
-          >
-            Cancel
-          </button>
+          <div className="post-card-actions">
+            <textarea
+              value={editedContent}
+              onChange={(e) => setEditedContent(e.target.value)}
+              rows={3}
+              className="post-card-textarea"
+            />
+            <button onClick={handleSave} disabled={isSaving}>
+              {isSaving ? <div className="loader loader-button"></div> : "Save"}
+            </button>
+            <button
+              onClick={() => {
+                setEditedContent(post.content);
+                setIsEditing(false);
+              }}
+            >
+              Cancel
+            </button>
+          </div>
         </>
       ) : (
         <>
           <p>{post.content}</p>
-          <button onClick={() => setIsEditing(true)}>Edit</button>
-          <button onClick={() => onDelete(post._id)}>Delete</button>
-          <button
-            onClick={() => setShowComments(!showComments)}
-            className="post-card-comments-toggle"
-          >
-            Comments
-          </button>
+          <div className="post-card-actions">
+            <button onClick={() => setIsEditing(true)}>Edit</button>
+            <button onClick={() => onDelete(post._id)}>Delete</button>
+            <button
+              onClick={() => setShowComments(!showComments)}
+              className="post-card-comments-toggle"
+            >
+              Comments
+            </button>
+          </div>
         </>
       )}
     </div>

@@ -8,6 +8,9 @@
   transition: transform 0.2s, box-shadow 0.2s;
   max-width: 500px;
   width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
 .post-card:hover {
@@ -64,4 +67,18 @@
 
 .post-card-comments-toggle:hover {
   background-color: #535bf2;
+}
+
+.post-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.post-card textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
 }

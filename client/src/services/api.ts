@@ -2,8 +2,22 @@ import type { Post } from "../types/post";
 
 const API_URL = "http://localhost:5000/api/posts";
 
-export const createPost = async () => {
-  // Implementation for creating a post
+export const createPost = async (
+  content: string,
+  userId: string
+): Promise<Post> => {
+  const res = await fetch("http://localhost:5000/api/posts", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content, userId }),
+  });
+
+  if (!res.ok) {
+    const error = await res.text();
+    throw new Error(error);
+  }
+
+  return res.json();
 };
 
 export const fetchPosts = async (): Promise<Post[]> => {

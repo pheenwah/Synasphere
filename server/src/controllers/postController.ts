@@ -6,14 +6,15 @@ export const createPost = async (req: Request, res: Response) => {
     console.log(req.body);
     const newPost = await PostModel.create(req.body);
     res.status(201).send(newPost);
-  } catch (error) {
+  } catch (error: any) {
+    console.error("createPost error:", error);
     res.status(400).send(error);
   }
 };
 
 export const getPosts = async (req: Request, res: Response) => {
   try {
-    const Posts = await PostModel.find({});
+    const Posts = await PostModel.find({}).sort({ createdAt: -1 });
     console.log("Posts", Posts);
     res.status(200).send(Posts);
   } catch (error) {

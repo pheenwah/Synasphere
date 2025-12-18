@@ -5,7 +5,7 @@ export default function Footer() {
     <footer className="app-footer">
       <div className="app-footer-inner">
         <p>© 2025 SynaSphere</p>
-        <p>Compare, Connext, Create</p>
+        <p>Compare, Connect, Create</p>
       </div>
     </footer>
   );
