@@ -14,7 +14,9 @@ export const createPost = async (req: Request, res: Response) => {
 
 export const getPosts = async (req: Request, res: Response) => {
   try {
-    const Posts = await PostModel.find({}).sort({ createdAt: -1 });
+    const Posts = await PostModel.find({})
+      .sort({ createdAt: -1 })
+      .populate("userId", "username sunSign");
     console.log("Posts", Posts);
     res.status(200).send(Posts);
   } catch (error) {

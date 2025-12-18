@@ -51,6 +51,10 @@ export default function PostCard({ post, onUpdate, onDelete }: Props) {
         </>
       ) : (
         <>
+          <div className="post-card-header">
+            <p className="post-card-username">{post.userId.username}</p>
+            <p className="post-card-sun-sign">☀️ {post.userId.sunSign}</p>
+          </div>
           <p>{post.content}</p>
           <div className="post-card-actions">
             <button onClick={() => setIsEditing(true)}>Edit</button>
